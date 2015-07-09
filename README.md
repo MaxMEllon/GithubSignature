@@ -1,7 +1,5 @@
 # GithubSignature
 
-[![Join the chat at https://gitter.im/MaxMEllon/GithubSignature](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MaxMEllon/GithubSignature?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ![sample](img/sample.png)
 
 ## About
@@ -33,6 +31,8 @@
 ```
 
 ## Contact
+
+[![Join the chat at https://gitter.im/MaxMEllon/GithubSignature](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MaxMEllon/GithubSignature?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## LICENSE
 
