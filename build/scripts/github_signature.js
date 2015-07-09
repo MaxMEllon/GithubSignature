@@ -1,5 +1,5 @@
 (function() {
-  var Signature, github;
+  var Signature;
 
   Signature = React.createClass({
     getDefaultProps: function() {
@@ -170,7 +170,7 @@
       this.callback = function(d) {
         return React.render(React.createElement(Signature, {
           "data": d
-        }), document.getElementById('content'));
+        }), document.getElementById('github-signature'));
       };
     }
 
@@ -181,9 +181,5 @@
     return Github;
 
   })();
-
-  github = new Github();
-
-  github.getUserData('maxmellon');
 
 }).call(this);

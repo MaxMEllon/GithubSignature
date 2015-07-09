@@ -120,10 +120,8 @@ class @Github
     @before = ->
       $('#content').html("loading now...")
     @callback = (d) ->
-      React.render <Signature data={d} />, document.getElementById('content')
+      React.render <Signature data={d} />, document.getElementById('github-signature')
 
   getUserData: (name)->
     return new GithubApi().getUserData(name, @before, @callback)
 
-github = new Github()
-github.getUserData('maxmellon')
