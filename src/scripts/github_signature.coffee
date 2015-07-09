@@ -1,15 +1,47 @@
 Signature = React.createClass
-  render: ->
-    github = new Github()
-    raw = github.getUserData()
-    console.debug raw
-    <div>
-      <span>
-      </span>
-    </div>
+  getDefaultProps: ->
+    style:
+      flame:
+        fontFamily: 'meiryo'
+        width: '200px'
+        height: '85px'
+        background: '#000'
+      reps:
+        width: '50px'
+        height: '55px'
+        background: '#44F'
+        color: '#fff'
+        title:
+          fontSize: '5px'
+          width: '0px'
+          height: '0px'
+          padding: '0px 0px 0px 10px'
+        text:
+          padding: '15px 0px 0px 14px'
+      name:
+        float: 'left'
+        width: '0px'
+        height: '0px'
+        color: '#fff'
+        margin: '0px'
 
-window.onload = ->
-  React.render <Signature username='maxmellon'/>, document.getElementById('content')
+  render: ->
+    flame = @props.style.flame
+    name = @props.style.name
+    reps = @props.style.reps
+    <div>
+      <div style={flame}>
+        <div style={reps}>
+          <p style={reps.title}>
+            public repos
+          </p>
+          <p style={reps.text}>
+            {@props.data.public_repos}
+          </p>
+        </div>
+        <h2 style={name}>{@props.data.name}</h2>
+      </div>
+    </div>
 
 class @GithubApi
   @server = 'https://api.github.com'
@@ -32,8 +64,8 @@ class @GithubApi
       error: (XMLHttpRequest, textStatus, errorThrown)->
         console.error('Unknown')
 
-  getUserData: (before, callback) ->
-    GithubApi.AjaxCall 'maxmellon', option =
+  getUserData: (name, before, callback) ->
+    GithubApi.AjaxCall name, option =
       type: 'GET'
       before: before
       callback: callback
@@ -43,9 +75,10 @@ class Github
     @before = ->
       $('#content').html("loading now...")
     @callback = (d) ->
-      $('#content').empty()
-      $('#content').text d.users
+      React.render <Signature data={d} />, document.getElementById('content')
 
-  getUserData: ()->
-    return new GithubApi().getUserData(@before, @callback)
+  getUserData: (name)->
+    return new GithubApi().getUserData(name, @before, @callback)
 
+github = new Github()
+github.getUserData('maxmellon')

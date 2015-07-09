@@ -1,21 +1,59 @@
 (function() {
-  var Github, Signature;
+  var Github, Signature, github;
 
   Signature = React.createClass({
+    getDefaultProps: function() {
+      return {
+        style: {
+          flame: {
+            fontFamily: 'meiryo',
+            width: '200px',
+            height: '85px',
+            background: '#000'
+          },
+          reps: {
+            width: '50px',
+            height: '55px',
+            background: '#44F',
+            color: '#fff',
+            title: {
+              fontSize: '5px',
+              width: '0px',
+              height: '0px',
+              padding: '0px 0px 0px 10px'
+            },
+            text: {
+              padding: '15px 0px 0px 14px'
+            }
+          },
+          name: {
+            float: 'left',
+            width: '0px',
+            height: '0px',
+            color: '#fff',
+            margin: '0px'
+          }
+        }
+      };
+    },
     render: function() {
-      var github, raw;
-      github = new Github();
-      raw = github.getUserData();
-      console.debug(raw);
-      return React.createElement("div", null, React.createElement("span", null));
+      var flame, name, reps;
+      flame = this.props.style.flame;
+      name = this.props.style.name;
+      reps = this.props.style.reps;
+      return React.createElement("div", null, React.createElement("div", {
+        "style": flame
+      }, React.createElement("div", {
+        "style": reps
+      }, React.createElement("p", {
+        "style": reps.title
+      }, "public repos"), React.createElement("p", {
+        "style": reps.text
+      }, this.props.data.public_repos)), React.createElement("h2", {
+        "style": name
+      }, this.props.data.name)));
     }
   });
-
-  window.onload = function() {
-    return React.render(React.createElement(Signature, {
-      "username": 'maxmellon'
-    }), document.getElementById('content'));
-  };
 
   this.GithubApi = (function() {
     GithubApi.server = 'https://api.github.com';
@@ -56,9 +94,9 @@
       });
     };
 
-    GithubApi.prototype.getUserData = function(before, callback) {
+    GithubApi.prototype.getUserData = function(name, before, callback) {
       var option;
-      return GithubApi.AjaxCall('maxmellon', option = {
+      return GithubApi.AjaxCall(name, option = {
         type: 'GET',
         before: before,
         callback: callback
@@ -75,17 +113,22 @@
         return $('#content').html("loading now...");
       };
       this.callback = function(d) {
-        $('#content').empty();
-        return $('#content').text(d.users);
+        return React.render(React.createElement(Signature, {
+          "data": d
+        }), document.getElementById('content'));
       };
     }
 
-    Github.prototype.getUserData = function() {
-      return new GithubApi().getUserData(this.before, this.callback);
+    Github.prototype.getUserData = function(name) {
+      return new GithubApi().getUserData(name, this.before, this.callback);
     };
 
     return Github;
 
   })();
+
+  github = new Github();
+
+  github.getUserData('maxmellon');
 
 }).call(this);
