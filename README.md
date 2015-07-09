@@ -6,6 +6,12 @@
 
 `Githubsignature` is can be embedded the signature in HTML.
 
+## Installation
+
+```
+$ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/scripts/github_signature.js
+```
+
 ## Requirements
 
 - [React.js](http://facebook.github.io/react/) >= 0.13.3
