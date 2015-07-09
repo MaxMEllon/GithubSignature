@@ -6,7 +6,7 @@
 
 ## Requirements
 
-- [React.js](http://facebook.github.io/react/) >= v0.13.3
+- [React.js](http://facebook.github.io/react/) >= 0.13.3
 - [JSXTransformaer](JSXTransformer) >= 0.13.2
 - [Github.api](https://api.github.com)
 
