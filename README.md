@@ -1,5 +1,7 @@
 # GithubSignature
 
+![sample][img/sample.png]
+
 ## About
 
 `Githubsignature` is can be embedded the signature in HTML.
