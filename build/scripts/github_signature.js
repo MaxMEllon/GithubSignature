@@ -1,5 +1,5 @@
 (function() {
-  var Github, Signature, github;
+  var Signature, github;
 
   Signature = React.createClass({
     getDefaultProps: function() {
@@ -7,40 +7,80 @@
         style: {
           flame: {
             fontFamily: 'meiryo',
-            width: '200px',
-            height: '85px',
+            width: '300px',
+            height: '75px',
             background: '#000'
           },
           reps: {
-            width: '50px',
-            height: '55px',
-            background: '#44F',
+            float: 'left',
+            width: '40px',
+            height: '75px',
+            background: '#44f',
             color: '#fff',
             title: {
               fontSize: '5px',
               width: '0px',
               height: '0px',
-              padding: '0px 0px 0px 10px'
+              padding: '0px 0px 0px 5px'
             },
             text: {
-              padding: '15px 0px 0px 14px'
+              width: '0px',
+              height: '0px',
+              padding: '15px 0px 0px 10px'
             }
           },
-          name: {
+          gists: {
             float: 'left',
-            width: '0px',
-            height: '0px',
+            width: '40px',
+            height: '75px',
+            background: '#280',
             color: '#fff',
-            margin: '0px'
+            title: {
+              fontSize: '5px',
+              width: '0px',
+              height: '0px',
+              padding: '0px 0px 0px 5px'
+            },
+            text: {
+              padding: '15px 0px 0px 10px'
+            }
+          },
+          head: {
+            fontSize: '5px',
+            color: '#fff'
+          },
+          name: {
+            color: '#fff',
+            margin: '0px',
+            fontSize: '18px'
+          },
+          followers: {
+            padding: '0px 0px 0px 0px',
+            color: '#fff',
+            fontSize: '10px'
+          },
+          following: {
+            padding: '0px 0px 0px 0px',
+            color: '#fff',
+            fontSize: '10px'
+          },
+          img: {
+            float: 'right',
+            height: '75px'
           }
         }
       };
     },
     render: function() {
-      var flame, name, reps;
+      var flame, followers, following, gists, head, img, name, reps;
       flame = this.props.style.flame;
       name = this.props.style.name;
       reps = this.props.style.reps;
+      gists = this.props.style.gists;
+      followers = this.props.style.followers;
+      following = this.props.style.following;
+      img = this.props.style.img;
+      head = this.props.style.head;
       return React.createElement("div", null, React.createElement("div", {
         "style": flame
       }, React.createElement("div", {
@@ -49,9 +89,24 @@
         "style": reps.title
       }, "public repos"), React.createElement("p", {
         "style": reps.text
-      }, this.props.data.public_repos)), React.createElement("h2", {
+      }, this.props.data.public_repos)), React.createElement("img", {
+        "style": img,
+        "src": this.props.data.avatar_url
+      }), React.createElement("div", {
+        "style": gists
+      }, React.createElement("p", {
+        "style": gists.title
+      }, "public gists"), React.createElement("p", {
+        "style": gists.text
+      }, this.props.data.public_gists)), React.createElement("div", {
+        "style": head
+      }, " github "), React.createElement("h2", {
         "style": name
-      }, this.props.data.name)));
+      }, this.props.data.name), React.createElement("div", {
+        "style": followers
+      }, "followers : ", this.props.data.followers), React.createElement("div", {
+        "style": following
+      }, "following : ", this.props.data.following)));
     }
   });
 
@@ -107,7 +162,7 @@
 
   })();
 
-  Github = (function() {
+  this.Github = (function() {
     function Github() {
       this.before = function() {
         return $('#content').html("loading now...");
