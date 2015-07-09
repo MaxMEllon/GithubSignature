@@ -1,6 +1,6 @@
 # GithubSignature
 
-![sample][img/sample.png]
+![sample](img/sample.png)
 
 ## About
 
