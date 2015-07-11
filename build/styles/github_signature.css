@@ -18,7 +18,7 @@
       text-align: right; }
   .signature .sig-container {
     position: relative;
-    bottom: 84px;
+    bottom: 86px;
     left: 102px;
     width: 216px;
     height: 84px;
@@ -34,9 +34,9 @@
     .signature .sig-container .sig-location {
       font-size: 7px; }
     .signature .sig-container .sig-blog {
-      font-size: 7px; }
+      font-size: 5px; }
     .signature .sig-container .sig-last-push {
-      font-size: 8px; }
+      font-size: 5px; }
   .signature .sig-avatar {
     position: relative;
     bottom: 84px;
