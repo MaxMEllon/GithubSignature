@@ -17,13 +17,16 @@
     .signature .sig-color-box-list .sig-color-box-num {
       text-align: right; }
   .signature .sig-container {
-    position: absolute;
-    top: 8px;
-    left: 108px;
-    width: 300px;
-    height: 0px;
-    margin-left: 3px; }
+    position: relative;
+    bottom: 84px;
+    left: 102px;
+    width: 216px;
+    height: 84px;
+    margin-left: 3px;
+    clear: both;
+    float: left; }
     .signature .sig-container .sig-user-name {
+      position: relative;
       clear: both;
       font-size: 24px; }
     .signature .sig-container .sig-company {
@@ -35,9 +38,8 @@
     .signature .sig-container .sig-last-push {
       font-size: 8px; }
   .signature .sig-avatar {
-    position: absolute;
-    left: 324px;
-    top: 8px;
+    position: relative;
+    bottom: 84px;
     float: right;
     height: 84px; }
 
