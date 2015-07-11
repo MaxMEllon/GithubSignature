@@ -2,21 +2,35 @@
   width: 400px;
   height: 100px;
   background-color: black;
-  color: white; }
-
-.color-box-list {
-  width: 100px;
-  height: 100px; }
-
-.follow-box {
-  float: left;
-  width: 50px;
-  height: 50px; }
-
-.star-box {
-  clear: both;
-  width: 100px;
-  height: 50px;
-  background-color: #F0F; }
+  color: white;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: "meiryo"; }
+  .signature .color-box-list {
+    width: 100px;
+    height: 100px; }
+    .signature .color-box-list .follow-box {
+      float: left;
+      width: 50px;
+      height: 50px; }
+    .signature .color-box-list .star-box {
+      clear: left;
+      width: 100px;
+      height: 100px;
+      background-color: #FF0; }
+  .signature .sig-container {
+    position: absolute;
+    top: 8px;
+    left: 108px;
+    width: 300px;
+    height: 0px;
+    margin-left: 3px; }
+    .signature .sig-container .user-name {
+      clear: both;
+      font-size: 24px; }
+    .signature .sig-container .public-repos {
+      font-size: 13px; }
+    .signature .sig-container .public-gists {
+      font-size: 13px; }
 
 /*# sourceMappingURL=github_signature.css.map */

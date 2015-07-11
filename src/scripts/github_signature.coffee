@@ -1,6 +1,4 @@
 Signature = React.createClass
-  getDefaultProps: ->
-
   render: ->
     <div className="signature">
       <ColorBoxList data={@props.data} />
@@ -8,8 +6,6 @@ Signature = React.createClass
     </div>
 
 ColorBoxList = React.createClass
-  getDefaultProps: ->
-
   render: ->
     <div className="color-box-list">
       <FollowBox type="followers" num={@props.data.followers} />
@@ -34,16 +30,16 @@ FollowBox = React.createClass
     <div className="follow-box" style={style}>{@props.num}</div>
 
 StarBox = React.createClass
-  getDefaultProps: ->
-
   render: ->
     <div className="star-box">{@props.num}</div>
 
 DataList = React.createClass
-  getDefaultProps: ->
-
   render: ->
-    <div></div>
+    <div className="sig-container">
+      <div className="user-name">{@props.data.name}</div>
+      <div className="public-repos">repos:{@props.data.public_repos}</div>
+      <div className="public-gists">gists:{@props.data.public_gists}</div>
+    </div>
 
 class @GithubApi
   server: 'https://api.github.com'

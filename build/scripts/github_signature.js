@@ -2,7 +2,6 @@
   var ColorBoxList, DataList, FollowBox, Signature, StarBox;
 
   Signature = React.createClass({
-    getDefaultProps: function() {},
     render: function() {
       return React.createElement("div", {
         "className": "signature"
@@ -15,7 +14,6 @@
   });
 
   ColorBoxList = React.createClass({
-    getDefaultProps: function() {},
     render: function() {
       return React.createElement("div", {
         "className": "color-box-list"
@@ -61,7 +59,6 @@
   });
 
   StarBox = React.createClass({
-    getDefaultProps: function() {},
     render: function() {
       return React.createElement("div", {
         "className": "star-box"
@@ -70,9 +67,16 @@
   });
 
   DataList = React.createClass({
-    getDefaultProps: function() {},
     render: function() {
-      return React.createElement("div", null);
+      return React.createElement("div", {
+        "className": "sig-container"
+      }, React.createElement("div", {
+        "className": "user-name"
+      }, this.props.data.name), React.createElement("div", {
+        "className": "public-repos"
+      }, "repos:", this.props.data.public_repos), React.createElement("div", {
+        "className": "public-gists"
+      }, "gists:", this.props.data.public_gists));
     }
   });
 
