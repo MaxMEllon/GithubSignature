@@ -25,18 +25,22 @@ $main-height: 84px
     .sig-color-box-num
       text-align: right
 
-  $sig-gap: 8px
-  $sig-container-width: $main-width - $box-list-width
-  $sig-container-height: $main-height - $box-list-height
+  $sig-gap: 2px
+  $avatar-size: $main-height
+  $sig-container-width: $main-width - $box-list-width - $avatar-size
+  $sig-container-height: $main-height
   .sig-container
-    position: absolute
-    top: $sig-gap
+    position: relative
+    bottom: $sig-container-height
     left: $box-list-width + $sig-gap
     width: $sig-container-width
     height: $sig-container-height
     margin-left: 3px
+    clear: both
+    float: left
 
     .sig-user-name
+      position: relative
       clear: both
       font-size: 24px
 
@@ -52,11 +56,9 @@ $main-height: 84px
     .sig-last-push
       font-size: 8px
 
-  $avatar-size: $main-height
   .sig-avatar
-    position: absolute
-    left: $main-width - $avatar-size + $sig-gap
-    top: $sig-gap
+    position: relative
+    bottom: $avatar-size
     float: right
     height: $avatar-size
 
