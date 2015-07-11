@@ -1,0 +1,62 @@
+$main-width: 400px
+$main-height: 84px
+
+.signature
+  width: $main-width
+  height: $main-height
+  background-color: black
+  color: white
+  overflow: hidden
+  box-sizing: border-box
+  font-family: 'meiryo UI'
+
+  $box-list-width: 100px
+  $box-list-height: $main-height
+  .sig-color-box-list
+    width: $box-list-width
+    height: $box-list-height
+
+    .sig-color-box
+      font-size: 19px
+      float: left
+      width: $box-list-width / 2
+      height: $box-list-height / 2
+
+    .sig-color-box-num
+      text-align: right
+
+  $sig-gap: 8px
+  $sig-container-width: $main-width - $box-list-width
+  $sig-container-height: $main-height - $box-list-height
+  .sig-container
+    position: absolute
+    top: $sig-gap
+    left: $box-list-width + $sig-gap
+    width: $sig-container-width
+    height: $sig-container-height
+    margin-left: 3px
+
+    .sig-user-name
+      clear: both
+      font-size: 24px
+
+    .sig-company
+      font-size: 7px
+
+    .sig-location
+      font-size: 7px
+
+    .sig-blog
+      font-size: 7px
+
+    .sig-last-push
+      font-size: 8px
+
+  $avatar-size: $main-height
+  .sig-avatar
+    position: absolute
+    left: $main-width - $avatar-size + $sig-gap
+    top: $sig-gap
+    float: right
+    height: $avatar-size
+
