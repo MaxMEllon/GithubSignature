@@ -26,9 +26,12 @@ module.exports = (grunt) ->
         src: "<%= sass.build.dest>"
 
     cssmin:
-      minify:
-        src: "<%= sass.build.dest>"
-        dest: "build/styles/github_signature.min.css"
+      target:
+        files: 'build/styles/github_signature.min.css': 'build/styles/github_signature.css'
+
+    uglify:
+      target:
+        files: 'build/scripts/github_signature.min.js': 'build/scripts/github_signature.js'
 
     watch:
       files: "src/**/*"
@@ -39,6 +42,7 @@ module.exports = (grunt) ->
         "csscss"
         "csslint"
         "cssmin"
+        "uglify"
       ]
 
     connect:
@@ -53,6 +57,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-sass"
   grunt.loadNpmTasks "grunt-contrib-csslint"
   grunt.loadNpmTasks "grunt-contrib-cssmin"
+  grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-csscss"
   grunt.loadNpmTasks "grunt-slim"
 
@@ -64,6 +69,7 @@ module.exports = (grunt) ->
     "csscss"
     "csslint"
     "cssmin"
+    "uglify"
     "connect"
     "watch"
   ]
