@@ -10,7 +10,6 @@ html
     script src="build/scripts/github_signature.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"
     javascript:
-      github = new Github()
-      github.getUserData('maxmellon')
-
+      signature = new GithubSignature()
+      signature.drawUserSignature('maxmellon')
 
