@@ -9,6 +9,7 @@
 ## Installation
 
 ```
+$ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/styles/github_signature.css
 $ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/scripts/github_signature.js
 ```
 
@@ -22,6 +23,9 @@ $ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/
 ## Usage
 
 ```html
+  <head>
+    <link href="path/to/github_signature.css">
+  </head>
   <body>
     <div id="github-signature"></div>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
