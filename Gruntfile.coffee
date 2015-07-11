@@ -14,7 +14,7 @@ module.exports = (grunt) ->
 
     cjsx:
       build:
-        src: ["src/scripts/*.coffee"]
+        src: "src/scripts/*.coffee"
         dest: "build/scripts/github_signature.js"
 
     csslint:
@@ -28,7 +28,7 @@ module.exports = (grunt) ->
     cssmin:
       minify:
         src: "<%= sass.build.dest>"
-        dest: "build/scripts/github_signature.min.css"
+        dest: "build/styles/github_signature.min.css"
 
     watch:
       files: "src/**/*"

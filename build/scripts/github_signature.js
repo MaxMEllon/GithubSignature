@@ -1,47 +1,89 @@
 (function() {
-  var FollowBox, FollowList, Signature;
+  var ColorBoxList, DataList, FollowBox, Signature, StarBox;
 
   Signature = React.createClass({
     getDefaultProps: function() {},
     render: function() {
       return React.createElement("div", {
-        "className": "Signature"
-      }, React.createElement(FollowList, {
+        "className": "signature"
+      }, React.createElement(ColorBoxList, {
+        "data": this.props.data
+      }), React.createElement(DataList, {
         "data": this.props.data
       }));
     }
   });
 
-  FollowList = React.createClass({
+  ColorBoxList = React.createClass({
     getDefaultProps: function() {},
     render: function() {
       return React.createElement("div", {
-        "className": "FllowList"
+        "className": "color-box-list"
       }, React.createElement(FollowBox, {
+        "type": "followers",
         "num": this.props.data.followers
       }), React.createElement(FollowBox, {
+        "type": "following",
         "num": this.props.data.following
+      }), React.createElement(StarBox, {
+        "num": this.props.data.stars
       }));
     }
   });
 
   FollowBox = React.createClass({
-    getDefaultProps: function() {},
+    getDefaultProps: function() {
+      return {
+        style: {
+          following: {
+            backgroundColor: '#00f'
+          },
+          followers: {
+            backgroundColor: '#0f0'
+          }
+        }
+      };
+    },
     render: function() {
+      var style;
+      switch (this.props.type) {
+        case "following":
+          style = this.props.style.following;
+          break;
+        case "followers":
+          style = this.props.style.followers;
+      }
       return React.createElement("div", {
-        "className": "FollowBox"
+        "className": "follow-box",
+        "style": style
       }, this.props.num);
     }
   });
 
-  this.GithubApi = (function() {
-    GithubApi.server = 'https://api.github.com';
+  StarBox = React.createClass({
+    getDefaultProps: function() {},
+    render: function() {
+      return React.createElement("div", {
+        "className": "star-box"
+      }, this.props.num);
+    }
+  });
 
-    GithubApi.userPath = '/users/';
+  DataList = React.createClass({
+    getDefaultProps: function() {},
+    render: function() {
+      return React.createElement("div", null);
+    }
+  });
+
+  this.GithubApi = (function() {
+    GithubApi.prototype.server = 'https://api.github.com';
+
+    GithubApi.prototype.userPath = '/users/';
 
     function GithubApi() {}
 
-    GithubApi.AjaxCall = function(username, option) {
+    GithubApi.AjaxCall = function(url, option) {
       if (option == null) {
         option = null;
       }
@@ -56,7 +98,7 @@
       }
       return $.ajax({
         type: option.type,
-        url: this.server + this.userPath + username,
+        url: url,
         beforeSend: function() {
           if (option.before != null) {
             return option.before();
@@ -68,14 +110,15 @@
           }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-          return console.error('Unknown');
+          return console.error(textStatus + " : " + errorThrown);
         }
       });
     };
 
     GithubApi.prototype.getUserData = function(name, before, callback) {
-      var option;
-      return GithubApi.AjaxCall(name, option = {
+      var option, url;
+      url = this.server + this.userPath + name;
+      return GithubApi.AjaxCall(url, option = {
         type: 'GET',
         before: before,
         callback: callback
@@ -89,7 +132,7 @@
   this.GithubSignature = (function() {
     function GithubSignature() {
       this.before = function() {
-        return $('#content').html("loading now...");
+        return $('#github-signature').html("loading signature...");
       };
       this.callback = function(d) {
         return React.render(React.createElement(Signature, {

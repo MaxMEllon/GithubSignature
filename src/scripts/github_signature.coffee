@@ -2,48 +2,73 @@ Signature = React.createClass
   getDefaultProps: ->
 
   render: ->
-    <div className="Signature">
-      <FollowList data={@props.data} />
+    <div className="signature">
+      <ColorBoxList data={@props.data} />
+      <DataList data={@props.data} />
     </div>
 
-FollowList = React.createClass
+ColorBoxList = React.createClass
   getDefaultProps: ->
 
   render: ->
-    <div className="FllowList">
-      <FollowBox num={@props.data.followers} />
-      <FollowBox num={@props.data.following} />
+    <div className="color-box-list">
+      <FollowBox type="followers" num={@props.data.followers} />
+      <FollowBox type="following" num={@props.data.following} />
+      <StarBox num={@props.data.stars} />
     </div>
 
 FollowBox = React.createClass
   getDefaultProps: ->
+    style:
+      following:
+        backgroundColor: '#00f'
+      followers:
+        backgroundColor: '#0f0'
 
   render: ->
-    <div className="FollowBox">{@props.num}</div>
+    switch @props.type
+      when "following"
+        style = @props.style.following
+      when "followers"
+        style = @props.style.followers
+    <div className="follow-box" style={style}>{@props.num}</div>
+
+StarBox = React.createClass
+  getDefaultProps: ->
+
+  render: ->
+    <div className="star-box">{@props.num}</div>
+
+DataList = React.createClass
+  getDefaultProps: ->
+
+  render: ->
+    <div></div>
 
 class @GithubApi
-  @server = 'https://api.github.com'
-  @userPath = '/users/'
+  server: 'https://api.github.com'
+  userPath: '/users/'
 
   constructor: ->
 
-  @AjaxCall: (username, option = null) ->
+  @AjaxCall: (url, option = null) ->
     option = {} unless option?
     option.type = 'GET' unless option.type?
     option.params = {} unless option.params?
 
     $.ajax
       type: option.type
-      url: @server + @userPath + username
+      url: url
       beforeSend: ->
         option.before() if option.before?
       success: (result, type)->
         option.callback(result) if option.callback?
       error: (XMLHttpRequest, textStatus, errorThrown)->
-        console.error('Unknown')
+        console.error(textStatus + " : " + errorThrown)
 
   getUserData: (name, before, callback) ->
-    GithubApi.AjaxCall name, option =
+    url = @server + @userPath + name
+    GithubApi.AjaxCall url, option =
       type: 'GET'
       before: before
       callback: callback
@@ -51,7 +76,7 @@ class @GithubApi
 class @GithubSignature
   constructor: ->
     @before = ->
-      $('#content').html("loading now...")
+      $('#github-signature').html("loading signature...")
     @callback = (d) ->
       React.render <Signature data={d} />, document.getElementById('github-signature')
 
