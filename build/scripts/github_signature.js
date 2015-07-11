@@ -1,5 +1,5 @@
 (function() {
-  var ColorBoxList, DataList, FollowBox, Signature, StarBox;
+  var Avatar, ColorBox, ColorBoxList, DataList, Signature;
 
   Signature = React.createClass({
     render: function() {
@@ -9,6 +9,8 @@
         "data": this.props.data
       }), React.createElement(DataList, {
         "data": this.props.data
+      }), React.createElement(Avatar, {
+        "url": this.props.data.avatar_url
       }));
     }
   });
@@ -16,28 +18,39 @@
   ColorBoxList = React.createClass({
     render: function() {
       return React.createElement("div", {
-        "className": "color-box-list"
-      }, React.createElement(FollowBox, {
+        "className": "sig-color-box-list"
+      }, React.createElement(ColorBox, {
         "type": "followers",
         "num": this.props.data.followers
-      }), React.createElement(FollowBox, {
+      }), React.createElement(ColorBox, {
         "type": "following",
         "num": this.props.data.following
-      }), React.createElement(StarBox, {
-        "num": this.props.data.stars
+      }), React.createElement(ColorBox, {
+        "type": "repos",
+        "num": this.props.data.public_repos
+      }), React.createElement(ColorBox, {
+        "type": "gists",
+        "num": this.props.data.public_gists
       }));
     }
   });
 
-  FollowBox = React.createClass({
+  ColorBox = React.createClass({
     getDefaultProps: function() {
       return {
         style: {
-          following: {
-            backgroundColor: '#00f'
-          },
+          fontSize: '10px',
           followers: {
-            backgroundColor: '#0f0'
+            backgroundColor: '#e51400'
+          },
+          following: {
+            backgroundColor: '#008a00'
+          },
+          repos: {
+            backgroundColor: '#0050ef'
+          },
+          gists: {
+            backgroundColor: '#f0a30a'
           }
         }
       };
@@ -50,19 +63,21 @@
           break;
         case "followers":
           style = this.props.style.followers;
+          break;
+        case "repos":
+          style = this.props.style.repos;
+          break;
+        case "gists":
+          style = this.props.style.gists;
       }
       return React.createElement("div", {
-        "className": "follow-box",
+        "className": "sig-color-box",
         "style": style
-      }, this.props.num);
-    }
-  });
-
-  StarBox = React.createClass({
-    render: function() {
-      return React.createElement("div", {
-        "className": "star-box"
-      }, this.props.num);
+      }, React.createElement("div", {
+        "style": this.props.style
+      }, this.props.type), React.createElement("div", {
+        "className": "sig-color-box-num"
+      }, this.props.num));
     }
   });
 
@@ -71,12 +86,25 @@
       return React.createElement("div", {
         "className": "sig-container"
       }, React.createElement("div", {
-        "className": "user-name"
+        "className": "sig-user-name"
       }, this.props.data.name), React.createElement("div", {
-        "className": "public-repos"
-      }, "repos:", this.props.data.public_repos), React.createElement("div", {
-        "className": "public-gists"
-      }, "gists:", this.props.data.public_gists));
+        "className": "sig-company"
+      }, "company : ", this.props.data.company), React.createElement("div", {
+        "className": "sig-location"
+      }, "location : ", this.props.data.location), React.createElement("div", {
+        "className": "sig-blog"
+      }, "blog : ", this.props.data.blog), React.createElement("div", {
+        "className": "sig-last-push"
+      }, "last update : ", this.props.data.updated_at));
+    }
+  });
+
+  Avatar = React.createClass({
+    render: function() {
+      return React.createElement("div", null, React.createElement("img", {
+        "className": "sig-avatar",
+        "src": this.props.url
+      }));
     }
   });
 

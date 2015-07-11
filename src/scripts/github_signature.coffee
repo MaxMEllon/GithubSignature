@@ -3,23 +3,30 @@ Signature = React.createClass
     <div className="signature">
       <ColorBoxList data={@props.data} />
       <DataList data={@props.data} />
+      <Avatar url={@props.data.avatar_url} />
     </div>
 
 ColorBoxList = React.createClass
   render: ->
-    <div className="color-box-list">
-      <FollowBox type="followers" num={@props.data.followers} />
-      <FollowBox type="following" num={@props.data.following} />
-      <StarBox num={@props.data.stars} />
+    <div className="sig-color-box-list">
+      <ColorBox type="followers" num={@props.data.followers} />
+      <ColorBox type="following" num={@props.data.following} />
+      <ColorBox type="repos" num={@props.data.public_repos} />
+      <ColorBox type="gists" num={@props.data.public_gists} />
     </div>
 
-FollowBox = React.createClass
+ColorBox = React.createClass
   getDefaultProps: ->
     style:
-      following:
-        backgroundColor: '#00f'
+      fontSize: '10px'
       followers:
-        backgroundColor: '#0f0'
+        backgroundColor: '#e51400'
+      following:
+        backgroundColor: '#008a00'
+      repos:
+        backgroundColor: '#0050ef'
+      gists:
+        backgroundColor: '#f0a30a'
 
   render: ->
     switch @props.type
@@ -27,18 +34,29 @@ FollowBox = React.createClass
         style = @props.style.following
       when "followers"
         style = @props.style.followers
-    <div className="follow-box" style={style}>{@props.num}</div>
-
-StarBox = React.createClass
-  render: ->
-    <div className="star-box">{@props.num}</div>
+      when "repos"
+        style = @props.style.repos
+      when "gists"
+        style = @props.style.gists
+    <div className="sig-color-box" style={style}>
+      <div style={@props.style}>{@props.type}</div>
+      <div className="sig-color-box-num">{@props.num}</div>
+    </div>
 
 DataList = React.createClass
   render: ->
     <div className="sig-container">
-      <div className="user-name">{@props.data.name}</div>
-      <div className="public-repos">repos:{@props.data.public_repos}</div>
-      <div className="public-gists">gists:{@props.data.public_gists}</div>
+      <div className="sig-user-name">{@props.data.name}</div>
+      <div className="sig-company">company : {@props.data.company}</div>
+      <div className="sig-location">location : {@props.data.location}</div>
+      <div className="sig-blog">blog : {@props.data.blog}</div>
+      <div className="sig-last-push">last update : {@props.data.updated_at}</div>
+    </div>
+
+Avatar = React.createClass
+  render: ->
+    <div>
+      <img className="sig-avatar" src={@props.url} />
     </div>
 
 class @GithubApi
