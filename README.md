@@ -34,8 +34,8 @@ $ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/
     <script src="path/to/github_signature.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"</script>
     <script>
-      github = new Github()
-      github.getUserData('[username]')
+      signature = new GithubSignature()
+      signature.drawUserSignature('[username]')
     </script>
   </body>
 ```
