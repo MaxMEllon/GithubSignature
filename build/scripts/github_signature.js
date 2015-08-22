@@ -1,8 +1,16 @@
 (function() {
-  var Avatar, ColorBox, ColorBoxList, DataList, Signature;
+  var Avatar, ColorBox, ColorBoxList, DataList, Signature,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  Signature = React.createClass({
-    render: function() {
+  Signature = (function(_super) {
+    __extends(Signature, _super);
+
+    function Signature() {
+      return Signature.__super__.constructor.apply(this, arguments);
+    }
+
+    Signature.prototype.render = function() {
       return React.createElement("div", {
         "className": "signature"
       }, React.createElement(ColorBoxList, {
@@ -12,11 +20,65 @@
       }), React.createElement(Avatar, {
         "url": this.props.data.avatar_url
       }));
-    }
-  });
+    };
 
-  ColorBoxList = React.createClass({
-    render: function() {
+    return Signature;
+
+  })(React.Component);
+
+  ColorBoxList = (function(_super) {
+    __extends(ColorBoxList, _super);
+
+    function ColorBoxList() {
+      return ColorBoxList.__super__.constructor.apply(this, arguments);
+    }
+
+    ColorBoxList.defaultProps = {
+      style: {
+        red: {
+          backgroundColor: 'red'
+        },
+        orange: {
+          backgroundColor: 'orange'
+        },
+        yellow: {
+          backgroundColor: 'yellow'
+        },
+        green: {
+          backgroundColor: 'green'
+        },
+        cyan: {
+          backgroundColor: 'cyan',
+          color: 'black'
+        },
+        purple: {
+          backgroundColor: 'purple'
+        }
+      }
+    };
+
+    ColorBoxList.prototype.render = function() {
+      var scouter, stars, style;
+      stars = githubStars(this.props.data.login);
+      scouter = stars * 1.5 + this.props.data.public_repos + this.props.data.followers / 2;
+      if ((0 <= scouter && scouter < 30)) {
+        style = this.props.style.red;
+      }
+      if ((30 <= scouter && scouter < 60)) {
+        style = this.props.style.orange;
+      }
+      if ((60 <= scouter && scouter < 90)) {
+        style = this.props.style.yellow;
+      }
+      if ((90 <= scouter && scouter < 200)) {
+        style = this.props.style.green;
+      }
+      if ((200 <= scouter && scouter < 500)) {
+        style = this.props.style.cyan;
+      }
+      if ((500 <= scouter && scouter < 999999)) {
+        style = this.props.style.purple;
+      }
       return React.createElement("div", {
         "className": "sig-color-box-list"
       }, React.createElement(ColorBox, {
@@ -29,33 +91,45 @@
         "type": "repos",
         "num": this.props.data.public_repos
       }), React.createElement(ColorBox, {
-        "type": "gists",
-        "num": this.props.data.public_gists
-      }));
-    }
-  });
+        "type": "stars",
+        "num": stars
+      }), React.createElement("div", {
+        "style": style,
+        "className": "sig-scouter",
+        "type": 'scouter'
+      }, 'S : ' + scouter));
+    };
 
-  ColorBox = React.createClass({
-    getDefaultProps: function() {
-      return {
-        style: {
-          fontSize: '10px',
-          followers: {
-            backgroundColor: '#e51400'
-          },
-          following: {
-            backgroundColor: '#008a00'
-          },
-          repos: {
-            backgroundColor: '#0050ef'
-          },
-          gists: {
-            backgroundColor: '#f0a30a'
-          }
+    return ColorBoxList;
+
+  })(React.Component);
+
+  ColorBox = (function(_super) {
+    __extends(ColorBox, _super);
+
+    function ColorBox() {
+      return ColorBox.__super__.constructor.apply(this, arguments);
+    }
+
+    ColorBox.defaultProps = {
+      style: {
+        fontSize: '10px',
+        followers: {
+          backgroundColor: '#e51400'
+        },
+        following: {
+          backgroundColor: '#008a00'
+        },
+        repos: {
+          backgroundColor: '#0050ef'
+        },
+        gists: {
+          backgroundColor: '#f0a30a'
         }
-      };
-    },
-    render: function() {
+      }
+    };
+
+    ColorBox.prototype.render = function() {
       var style;
       switch (this.props.type) {
         case "following":
@@ -67,7 +141,7 @@
         case "repos":
           style = this.props.style.repos;
           break;
-        case "gists":
+        case "stars":
           style = this.props.style.gists;
       }
       return React.createElement("div", {
@@ -78,35 +152,75 @@
       }, this.props.type), React.createElement("div", {
         "className": "sig-color-box-num"
       }, this.props.num));
-    }
-  });
+    };
 
-  DataList = React.createClass({
-    render: function() {
+    return ColorBox;
+
+  })(React.Component);
+
+  DataList = (function(_super) {
+    __extends(DataList, _super);
+
+    function DataList(props) {
+      DataList.__super__.constructor.call(this, props);
+      if (props.data.name === null) {
+        props.data.name = props.data.login;
+      }
+      if (props.data.name.length >= 16) {
+        this.state = {
+          style: {
+            marginTop: '7px',
+            fontSize: '14px',
+            height: '22px'
+          }
+        };
+      } else {
+        this.state = {
+          style: {
+            fontSize: '20px'
+          }
+        };
+      }
+    }
+
+    DataList.prototype.render = function() {
       return React.createElement("div", {
         "className": "sig-container"
       }, React.createElement("div", {
-        "className": "sig-user-name"
+        "style": this.state.style,
+        "className": "sig-text sig-user-name"
       }, this.props.data.name), React.createElement("div", {
-        "className": "sig-company"
+        "className": "sig-text sig-company"
       }, "company : ", this.props.data.company), React.createElement("div", {
-        "className": "sig-location"
+        "className": "sig-text sig-location"
       }, "location : ", this.props.data.location), React.createElement("div", {
-        "className": "sig-blog"
+        "className": "sig-text sig-blog"
       }, "blog : ", this.props.data.blog), React.createElement("div", {
-        "className": "sig-last-push"
+        "className": "sig-text sig-last-push"
       }, "last update : ", this.props.data.updated_at));
-    }
-  });
+    };
 
-  Avatar = React.createClass({
-    render: function() {
+    return DataList;
+
+  })(React.Component);
+
+  Avatar = (function(_super) {
+    __extends(Avatar, _super);
+
+    function Avatar() {
+      return Avatar.__super__.constructor.apply(this, arguments);
+    }
+
+    Avatar.prototype.render = function() {
       return React.createElement("div", null, React.createElement("img", {
         "className": "sig-avatar",
         "src": this.props.url
       }));
-    }
-  });
+    };
+
+    return Avatar;
+
+  })(React.Component);
 
   this.GithubApi = (function() {
     GithubApi.prototype.server = 'https://api.github.com';

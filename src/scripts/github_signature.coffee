@@ -1,4 +1,4 @@
-Signature = React.createClass
+class Signature extends React.Component
   render: ->
     <div className="signature">
       <ColorBoxList data={@props.data} />
@@ -6,17 +6,36 @@ Signature = React.createClass
       <Avatar url={@props.data.avatar_url} />
     </div>
 
-ColorBoxList = React.createClass
+class ColorBoxList extends React.Component
+  @defaultProps:
+    style:
+      red:    backgroundColor: 'red'
+      orange: backgroundColor: 'orange'
+      yellow: backgroundColor: 'yellow'
+      green:  backgroundColor: 'green'
+      cyan:
+        backgroundColor: 'cyan'
+        color: 'black'
+      purple: backgroundColor: 'purple'
   render: ->
+    stars = githubStars(@props.data.login)
+    scouter = stars * 1.5 + @props.data.public_repos + @props.data.followers / 2
+    style = @props.style.red    if   0 <= scouter < 30
+    style = @props.style.orange if  30 <= scouter < 60
+    style = @props.style.yellow if  60 <= scouter < 90
+    style = @props.style.green  if  90 <= scouter < 200
+    style = @props.style.cyan   if 200 <= scouter < 500
+    style = @props.style.purple if 500 <= scouter < 999999
     <div className="sig-color-box-list">
       <ColorBox type="followers" num={@props.data.followers} />
       <ColorBox type="following" num={@props.data.following} />
       <ColorBox type="repos" num={@props.data.public_repos} />
-      <ColorBox type="gists" num={@props.data.public_gists} />
+      <ColorBox type="stars" num={stars} />
+      <div style={style} className="sig-scouter" type='scouter'>{'S : ' + scouter}</div>
     </div>
 
-ColorBox = React.createClass
-  getDefaultProps: ->
+class ColorBox extends React.Component
+  @defaultProps:
     style:
       fontSize: '10px'
       followers:
@@ -36,24 +55,38 @@ ColorBox = React.createClass
         style = @props.style.followers
       when "repos"
         style = @props.style.repos
-      when "gists"
+      when "stars"
         style = @props.style.gists
     <div className="sig-color-box" style={style}>
       <div style={@props.style}>{@props.type}</div>
       <div className="sig-color-box-num">{@props.num}</div>
     </div>
 
-DataList = React.createClass
+class DataList extends React.Component
+  constructor: (props) ->
+    super props
+    props.data.name = props.data.login if props.data.name == null
+    if props.data.name.length >= 16
+      @state =
+        style:
+          marginTop: '7px'
+          fontSize: '14px'
+          height: '22px'
+    else
+      @state =
+        style:
+          fontSize: '20px'
+
   render: ->
     <div className="sig-container">
-      <div className="sig-user-name">{@props.data.name}</div>
-      <div className="sig-company">company : {@props.data.company}</div>
-      <div className="sig-location">location : {@props.data.location}</div>
-      <div className="sig-blog">blog : {@props.data.blog}</div>
-      <div className="sig-last-push">last update : {@props.data.updated_at}</div>
+      <div style={@state.style} className="sig-text sig-user-name">{@props.data.name}</div>
+      <div className="sig-text sig-company">company : {@props.data.company}</div>
+      <div className="sig-text sig-location">location : {@props.data.location}</div>
+      <div className="sig-text sig-blog">blog : {@props.data.blog}</div>
+      <div className="sig-text sig-last-push">last update : {@props.data.updated_at}</div>
     </div>
 
-Avatar = React.createClass
+class Avatar extends React.Component
   render: ->
     <div>
       <img className="sig-avatar" src={@props.url} />
