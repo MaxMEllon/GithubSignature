@@ -11,9 +11,9 @@
     height: 64px; }
     .signature .sig-color-box-list .sig-scouter {
       float: left;
-      width: 98px;
-      height: 18px;
-      border: 1px solid black;
+      width: 100px;
+      height: 19px;
+      border-top: 1px solid white;
       font-size: 15px; }
     .signature .sig-color-box-list .sig-color-box {
       font-size: 19px;
