@@ -31,7 +31,7 @@ module.exports = (grunt) ->
 
     uglify:
       target:
-        files: 'build/scripts/github_signature.min.js': 'build/scripts/github_signature.js'
+        files: 'build/scripts/github_signature.min.js': ['build/scripts/github_signature.js', 'build/scripts/github-stars.js']
 
     watch:
       files: "src/**/*"
