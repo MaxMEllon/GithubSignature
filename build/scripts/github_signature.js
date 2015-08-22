@@ -35,7 +35,7 @@
 
     ColorBoxList.prototype.render = function() {
       var stars;
-      stars = githubStars(this.props.data.name);
+      stars = githubStars(this.props.data.login);
       return React.createElement("div", {
         "className": "sig-color-box-list"
       }, React.createElement(ColorBox, {

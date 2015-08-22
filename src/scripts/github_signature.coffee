@@ -8,7 +8,7 @@ class Signature extends React.Component
 
 class ColorBoxList extends React.Component
   render: ->
-    stars = githubStars(@props.data.name)
+    stars = githubStars(@props.data.login)
     <div className="sig-color-box-list">
       <ColorBox type="followers" num={@props.data.followers} />
       <ColorBox type="following" num={@props.data.following} />
