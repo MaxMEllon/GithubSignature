@@ -114,14 +114,30 @@
   DataList = (function(_super) {
     __extends(DataList, _super);
 
-    function DataList() {
-      return DataList.__super__.constructor.apply(this, arguments);
+    function DataList(props) {
+      DataList.__super__.constructor.call(this, props);
+      if (props.data.name.length >= 16) {
+        this.state = {
+          style: {
+            marginTop: '7px',
+            fontSize: '14px',
+            height: '22px'
+          }
+        };
+      } else {
+        this.state = {
+          style: {
+            fontSize: '20px'
+          }
+        };
+      }
     }
 
     DataList.prototype.render = function() {
       return React.createElement("div", {
         "className": "sig-container"
       }, React.createElement("div", {
+        "style": this.state.style,
         "className": "sig-text sig-user-name"
       }, this.props.data.name), React.createElement("div", {
         "className": "sig-text sig-company"

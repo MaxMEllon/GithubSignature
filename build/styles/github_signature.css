@@ -15,6 +15,8 @@
       width: 50px;
       height: 42px; }
     .signature .sig-color-box-list .sig-color-box-num {
+      margin-top: 8px;
+      font-size: 14px;
       text-align: right; }
   .signature .sig-container {
     position: relative;
@@ -33,7 +35,6 @@
     .signature .sig-container .sig-user-name {
       position: relative;
       clear: both;
-      font-size: 14px;
       height: 30px; }
   .signature .sig-avatar {
     position: relative;

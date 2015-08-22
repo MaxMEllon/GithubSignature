@@ -45,9 +45,22 @@ class ColorBox extends React.Component
     </div>
 
 class DataList extends React.Component
+  constructor: (props) ->
+    super props
+    if props.data.name.length >= 16
+      @state =
+        style:
+          marginTop: '7px'
+          fontSize: '14px'
+          height: '22px'
+    else
+      @state =
+        style:
+          fontSize: '20px'
+
   render: ->
     <div className="sig-container">
-      <div className="sig-text sig-user-name">{@props.data.name}</div>
+      <div style={@state.style} className="sig-text sig-user-name">{@props.data.name}</div>
       <div className="sig-text sig-company">company : {@props.data.company}</div>
       <div className="sig-text sig-location">location : {@props.data.location}</div>
       <div className="sig-text sig-blog">blog : {@props.data.blog}</div>
