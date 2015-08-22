@@ -1,4 +1,4 @@
-Signature = React.createClass
+class Signature extends React.Component
   render: ->
     <div className="signature">
       <ColorBoxList data={@props.data} />
@@ -6,7 +6,7 @@ Signature = React.createClass
       <Avatar url={@props.data.avatar_url} />
     </div>
 
-ColorBoxList = React.createClass
+class ColorBoxList extends React.Component
   render: ->
     stars = githubStars(@props.data.name)
     <div className="sig-color-box-list">
@@ -16,8 +16,8 @@ ColorBoxList = React.createClass
       <ColorBox type="stars" num={stars} />
     </div>
 
-ColorBox = React.createClass
-  getDefaultProps: ->
+class ColorBox extends React.Component
+  @defaultProps:
     style:
       fontSize: '10px'
       followers:
@@ -44,7 +44,7 @@ ColorBox = React.createClass
       <div className="sig-color-box-num">{@props.num}</div>
     </div>
 
-DataList = React.createClass
+class DataList extends React.Component
   render: ->
     <div className="sig-container">
       <div className="sig-text sig-user-name">{@props.data.name}</div>
@@ -54,7 +54,7 @@ DataList = React.createClass
       <div className="sig-text sig-last-push">last update : {@props.data.updated_at}</div>
     </div>
 
-Avatar = React.createClass
+class Avatar extends React.Component
   render: ->
     <div>
       <img className="sig-avatar" src={@props.url} />

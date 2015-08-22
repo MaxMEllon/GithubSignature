@@ -1,8 +1,16 @@
 (function() {
-  var Avatar, ColorBox, ColorBoxList, DataList, Signature;
+  var Avatar, ColorBox, ColorBoxList, DataList, Signature,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  Signature = React.createClass({
-    render: function() {
+  Signature = (function(_super) {
+    __extends(Signature, _super);
+
+    function Signature() {
+      return Signature.__super__.constructor.apply(this, arguments);
+    }
+
+    Signature.prototype.render = function() {
       return React.createElement("div", {
         "className": "signature"
       }, React.createElement(ColorBoxList, {
@@ -12,11 +20,20 @@
       }), React.createElement(Avatar, {
         "url": this.props.data.avatar_url
       }));
-    }
-  });
+    };
 
-  ColorBoxList = React.createClass({
-    render: function() {
+    return Signature;
+
+  })(React.Component);
+
+  ColorBoxList = (function(_super) {
+    __extends(ColorBoxList, _super);
+
+    function ColorBoxList() {
+      return ColorBoxList.__super__.constructor.apply(this, arguments);
+    }
+
+    ColorBoxList.prototype.render = function() {
       var stars;
       stars = githubStars(this.props.data.name);
       return React.createElement("div", {
@@ -34,30 +51,38 @@
         "type": "stars",
         "num": stars
       }));
-    }
-  });
+    };
 
-  ColorBox = React.createClass({
-    getDefaultProps: function() {
-      return {
-        style: {
-          fontSize: '10px',
-          followers: {
-            backgroundColor: '#e51400'
-          },
-          following: {
-            backgroundColor: '#008a00'
-          },
-          repos: {
-            backgroundColor: '#0050ef'
-          },
-          gists: {
-            backgroundColor: '#f0a30a'
-          }
+    return ColorBoxList;
+
+  })(React.Component);
+
+  ColorBox = (function(_super) {
+    __extends(ColorBox, _super);
+
+    function ColorBox() {
+      return ColorBox.__super__.constructor.apply(this, arguments);
+    }
+
+    ColorBox.defaultProps = {
+      style: {
+        fontSize: '10px',
+        followers: {
+          backgroundColor: '#e51400'
+        },
+        following: {
+          backgroundColor: '#008a00'
+        },
+        repos: {
+          backgroundColor: '#0050ef'
+        },
+        gists: {
+          backgroundColor: '#f0a30a'
         }
-      };
-    },
-    render: function() {
+      }
+    };
+
+    ColorBox.prototype.render = function() {
       var style;
       switch (this.props.type) {
         case "following":
@@ -80,11 +105,20 @@
       }, this.props.type), React.createElement("div", {
         "className": "sig-color-box-num"
       }, this.props.num));
-    }
-  });
+    };
 
-  DataList = React.createClass({
-    render: function() {
+    return ColorBox;
+
+  })(React.Component);
+
+  DataList = (function(_super) {
+    __extends(DataList, _super);
+
+    function DataList() {
+      return DataList.__super__.constructor.apply(this, arguments);
+    }
+
+    DataList.prototype.render = function() {
       return React.createElement("div", {
         "className": "sig-container"
       }, React.createElement("div", {
@@ -98,17 +132,29 @@
       }, "blog : ", this.props.data.blog), React.createElement("div", {
         "className": "sig-text sig-last-push"
       }, "last update : ", this.props.data.updated_at));
-    }
-  });
+    };
 
-  Avatar = React.createClass({
-    render: function() {
+    return DataList;
+
+  })(React.Component);
+
+  Avatar = (function(_super) {
+    __extends(Avatar, _super);
+
+    function Avatar() {
+      return Avatar.__super__.constructor.apply(this, arguments);
+    }
+
+    Avatar.prototype.render = function() {
       return React.createElement("div", null, React.createElement("img", {
         "className": "sig-avatar",
         "src": this.props.url
       }));
-    }
-  });
+    };
+
+    return Avatar;
+
+  })(React.Component);
 
   this.GithubApi = (function() {
     GithubApi.prototype.server = 'https://api.github.com';
