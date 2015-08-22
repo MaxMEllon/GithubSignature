@@ -11,10 +11,17 @@ $main-height: 84px
   font-family: 'meiryo UI'
 
   $box-list-width: 100px
-  $box-list-height: $main-height
+  $box-list-height: $main-height - 20px
   .sig-color-box-list
     width: $box-list-width
     height: $box-list-height
+
+    .sig-scouter
+      float: left
+      width: $box-list-width - 2px
+      height: 18px
+      border: 1px solid black
+      font-size: 15px
 
     .sig-color-box
       font-size: 19px
@@ -23,7 +30,6 @@ $main-height: 84px
       height: $box-list-height / 2
 
     .sig-color-box-num
-      margin-top: 8px
       font-size: 14px
       text-align: right
 
@@ -53,6 +59,7 @@ $main-height: 84px
       height: 30px
 
   .sig-avatar
+    // margin-top: -4px
     position: relative
     bottom: $avatar-size
     float: right

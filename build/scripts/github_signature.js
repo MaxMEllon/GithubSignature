@@ -33,9 +33,52 @@
       return ColorBoxList.__super__.constructor.apply(this, arguments);
     }
 
+    ColorBoxList.defaultProps = {
+      style: {
+        red: {
+          backgroundColor: 'red'
+        },
+        orange: {
+          backgroundColor: 'orange'
+        },
+        yellow: {
+          backgroundColor: 'yellow'
+        },
+        green: {
+          backgroundColor: 'green'
+        },
+        cyan: {
+          backgroundColor: 'cyan',
+          color: 'black'
+        },
+        purple: {
+          backgroundColor: 'purple'
+        }
+      }
+    };
+
     ColorBoxList.prototype.render = function() {
-      var stars;
+      var scouter, stars, style;
       stars = githubStars(this.props.data.login);
+      scouter = stars * 1.5 + this.props.data.public_repos + this.props.data.followers / 2;
+      if ((0 <= scouter && scouter < 30)) {
+        style = this.props.style.red;
+      }
+      if ((30 <= scouter && scouter < 60)) {
+        style = this.props.style.orange;
+      }
+      if ((60 <= scouter && scouter < 90)) {
+        style = this.props.style.yellow;
+      }
+      if ((90 <= scouter && scouter < 200)) {
+        style = this.props.style.green;
+      }
+      if ((200 <= scouter && scouter < 500)) {
+        style = this.props.style.cyan;
+      }
+      if ((500 <= scouter && scouter < 999999)) {
+        style = this.props.style.purple;
+      }
       return React.createElement("div", {
         "className": "sig-color-box-list"
       }, React.createElement(ColorBox, {
@@ -50,7 +93,11 @@
       }), React.createElement(ColorBox, {
         "type": "stars",
         "num": stars
-      }));
+      }), React.createElement("div", {
+        "style": style,
+        "className": "sig-scouter",
+        "type": 'scouter'
+      }, 'S : ' + scouter));
     };
 
     return ColorBoxList;
@@ -116,6 +163,9 @@
 
     function DataList(props) {
       DataList.__super__.constructor.call(this, props);
+      if (props.data.name === null) {
+        props.data.name = props.data.login;
+      }
       if (props.data.name.length >= 16) {
         this.state = {
           style: {

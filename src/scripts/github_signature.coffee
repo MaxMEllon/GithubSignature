@@ -7,13 +7,31 @@ class Signature extends React.Component
     </div>
 
 class ColorBoxList extends React.Component
+  @defaultProps:
+    style:
+      red:    backgroundColor: 'red'
+      orange: backgroundColor: 'orange'
+      yellow: backgroundColor: 'yellow'
+      green:  backgroundColor: 'green'
+      cyan:
+        backgroundColor: 'cyan'
+        color: 'black'
+      purple: backgroundColor: 'purple'
   render: ->
     stars = githubStars(@props.data.login)
+    scouter = stars * 1.5 + @props.data.public_repos + @props.data.followers / 2
+    style = @props.style.red    if   0 <= scouter < 30
+    style = @props.style.orange if  30 <= scouter < 60
+    style = @props.style.yellow if  60 <= scouter < 90
+    style = @props.style.green  if  90 <= scouter < 200
+    style = @props.style.cyan   if 200 <= scouter < 500
+    style = @props.style.purple if 500 <= scouter < 999999
     <div className="sig-color-box-list">
       <ColorBox type="followers" num={@props.data.followers} />
       <ColorBox type="following" num={@props.data.following} />
       <ColorBox type="repos" num={@props.data.public_repos} />
       <ColorBox type="stars" num={stars} />
+      <div style={style} className="sig-scouter" type='scouter'>{'S : ' + scouter}</div>
     </div>
 
 class ColorBox extends React.Component
@@ -47,6 +65,7 @@ class ColorBox extends React.Component
 class DataList extends React.Component
   constructor: (props) ->
     super props
+    props.data.name = props.data.login if props.data.name == null
     if props.data.name.length >= 16
       @state =
         style:
