@@ -8,11 +8,12 @@ Signature = React.createClass
 
 ColorBoxList = React.createClass
   render: ->
+    stars = githubStars(@props.data.name)
     <div className="sig-color-box-list">
       <ColorBox type="followers" num={@props.data.followers} />
       <ColorBox type="following" num={@props.data.following} />
       <ColorBox type="repos" num={@props.data.public_repos} />
-      <ColorBox type="gists" num={@props.data.public_gists} />
+      <ColorBox type="stars" num={stars} />
     </div>
 
 ColorBox = React.createClass
@@ -36,7 +37,7 @@ ColorBox = React.createClass
         style = @props.style.followers
       when "repos"
         style = @props.style.repos
-      when "gists"
+      when "stars"
         style = @props.style.gists
     <div className="sig-color-box" style={style}>
       <div style={@props.style}>{@props.type}</div>
@@ -46,11 +47,11 @@ ColorBox = React.createClass
 DataList = React.createClass
   render: ->
     <div className="sig-container">
-      <div className="sig-user-name">{@props.data.name}</div>
-      <div className="sig-company">company : {@props.data.company}</div>
-      <div className="sig-location">location : {@props.data.location}</div>
-      <div className="sig-blog">blog : {@props.data.blog}</div>
-      <div className="sig-last-push">last update : {@props.data.updated_at}</div>
+      <div className="sig-text sig-user-name">{@props.data.name}</div>
+      <div className="sig-text sig-company">company : {@props.data.company}</div>
+      <div className="sig-text sig-location">location : {@props.data.location}</div>
+      <div className="sig-text sig-blog">blog : {@props.data.blog}</div>
+      <div className="sig-text sig-last-push">last update : {@props.data.updated_at}</div>
     </div>
 
 Avatar = React.createClass

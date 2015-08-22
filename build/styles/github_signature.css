@@ -25,18 +25,16 @@
     margin-left: 3px;
     clear: both;
     float: left; }
+    .signature .sig-container .sig-text {
+      font-size: 7px;
+      height: 14px;
+      margin: 0px;
+      padding: 0px; }
     .signature .sig-container .sig-user-name {
       position: relative;
       clear: both;
-      font-size: 20px; }
-    .signature .sig-container .sig-company {
-      font-size: 7px; }
-    .signature .sig-container .sig-location {
-      font-size: 7px; }
-    .signature .sig-container .sig-blog {
-      font-size: 5px; }
-    .signature .sig-container .sig-last-push {
-      font-size: 5px; }
+      font-size: 14px;
+      height: 30px; }
   .signature .sig-avatar {
     position: relative;
     bottom: 84px;

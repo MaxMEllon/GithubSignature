@@ -17,6 +17,8 @@
 
   ColorBoxList = React.createClass({
     render: function() {
+      var stars;
+      stars = githubStars(this.props.data.name);
       return React.createElement("div", {
         "className": "sig-color-box-list"
       }, React.createElement(ColorBox, {
@@ -29,8 +31,8 @@
         "type": "repos",
         "num": this.props.data.public_repos
       }), React.createElement(ColorBox, {
-        "type": "gists",
-        "num": this.props.data.public_gists
+        "type": "stars",
+        "num": stars
       }));
     }
   });
@@ -67,7 +69,7 @@
         case "repos":
           style = this.props.style.repos;
           break;
-        case "gists":
+        case "stars":
           style = this.props.style.gists;
       }
       return React.createElement("div", {
@@ -86,15 +88,15 @@
       return React.createElement("div", {
         "className": "sig-container"
       }, React.createElement("div", {
-        "className": "sig-user-name"
+        "className": "sig-text sig-user-name"
       }, this.props.data.name), React.createElement("div", {
-        "className": "sig-company"
+        "className": "sig-text sig-company"
       }, "company : ", this.props.data.company), React.createElement("div", {
-        "className": "sig-location"
+        "className": "sig-text sig-location"
       }, "location : ", this.props.data.location), React.createElement("div", {
-        "className": "sig-blog"
+        "className": "sig-text sig-blog"
       }, "blog : ", this.props.data.blog), React.createElement("div", {
-        "className": "sig-last-push"
+        "className": "sig-text sig-last-push"
       }, "last update : ", this.props.data.updated_at));
     }
   });
