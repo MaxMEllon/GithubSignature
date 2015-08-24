@@ -94,7 +94,8 @@ class Avatar extends React.Component
 
 class @GithubApi
   server: 'https://api.github.com'
-  userPath: '/users/'
+  userPath:  '/users/'
+  reposPath: '/repos'
 
   constructor: ->
 
@@ -119,6 +120,12 @@ class @GithubApi
       type: 'GET'
       before: before
       callback: callback
+
+  getUsersRepoData: (name) ->
+    url = @server + @userPath + name + @reposPath
+    $.ajax
+      url: url
+      type: 'GET'
 
 class @GithubSignature
   constructor: ->

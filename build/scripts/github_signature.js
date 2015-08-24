@@ -227,6 +227,8 @@
 
     GithubApi.prototype.userPath = '/users/';
 
+    GithubApi.prototype.reposPath = '/repos';
+
     function GithubApi() {}
 
     GithubApi.AjaxCall = function(url, option) {
@@ -268,6 +270,15 @@
         type: 'GET',
         before: before,
         callback: callback
+      });
+    };
+
+    GithubApi.prototype.getUsersRepoData = function(name) {
+      var url;
+      url = this.server + this.userPath + name + this.reposPath;
+      return $.ajax({
+        url: url,
+        type: 'GET'
       });
     };
 
