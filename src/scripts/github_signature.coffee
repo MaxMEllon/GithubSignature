@@ -1,4 +1,26 @@
 class Signature extends React.Component
+  constructor: (props) ->
+    super props
+    props.data.name = props.data.login if props.data.name == null
+    @langCounts = @getLangsCount(props.data.name)
+    @langTypes  = @langCounts.length
+
+  getLangsCallback: (d) ->
+    langs = []
+    localStorage.clear()
+    for repo, k in d
+      localStorage[k] = repo.language
+
+  getLangsCount: (name)->
+    api = new GithubApi().getUsersRepoData(name, @getLangsCallback)
+    langs = {}
+    for k in [0...localStorage.length]
+      langs[localStorage[k]] = 0
+    for k in [0...localStorage.length]
+      langs[localStorage[k]] += 1
+    localStorage.clear()
+    langs
+
   render: ->
     <div className="signature">
       <ColorBoxList data={@props.data} />
@@ -11,7 +33,9 @@ class ColorBoxList extends React.Component
     style:
       red:    backgroundColor: 'red'
       orange: backgroundColor: 'orange'
-      yellow: backgroundColor: 'yellow'
+      yellow:
+        backgroundColor: 'yellow'
+        color: 'black'
       green:  backgroundColor: 'green'
       cyan:
         backgroundColor: 'cyan'
@@ -121,11 +145,11 @@ class @GithubApi
       before: before
       callback: callback
 
-  getUsersRepoData: (name) ->
+  getUsersRepoData: (name, callback) ->
     url = @server + @userPath + name + @reposPath
-    $.ajax
-      url: url
+    GithubApi.AjaxCall url, oprion =
       type: 'GET'
+      callback: callback
 
 class @GithubSignature
   constructor: ->

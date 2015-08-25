@@ -6,9 +6,40 @@
   Signature = (function(_super) {
     __extends(Signature, _super);
 
-    function Signature() {
-      return Signature.__super__.constructor.apply(this, arguments);
+    function Signature(props) {
+      Signature.__super__.constructor.call(this, props);
+      if (props.data.name === null) {
+        props.data.name = props.data.login;
+      }
+      this.langCounts = this.getLangsCount(props.data.name);
+      this.langTypes = this.langCounts.length;
     }
+
+    Signature.prototype.getLangsCallback = function(d) {
+      var k, langs, repo, _i, _len, _results;
+      langs = [];
+      localStorage.clear();
+      _results = [];
+      for (k = _i = 0, _len = d.length; _i < _len; k = ++_i) {
+        repo = d[k];
+        _results.push(localStorage[k] = repo.language);
+      }
+      return _results;
+    };
+
+    Signature.prototype.getLangsCount = function(name) {
+      var api, k, langs, _i, _j, _ref, _ref1;
+      api = new GithubApi().getUsersRepoData(name, this.getLangsCallback);
+      langs = {};
+      for (k = _i = 0, _ref = localStorage.length; 0 <= _ref ? _i < _ref : _i > _ref; k = 0 <= _ref ? ++_i : --_i) {
+        langs[localStorage[k]] = 0;
+      }
+      for (k = _j = 0, _ref1 = localStorage.length; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; k = 0 <= _ref1 ? ++_j : --_j) {
+        langs[localStorage[k]] += 1;
+      }
+      localStorage.clear();
+      return langs;
+    };
 
     Signature.prototype.render = function() {
       return React.createElement("div", {
@@ -42,7 +73,8 @@
           backgroundColor: 'orange'
         },
         yellow: {
-          backgroundColor: 'yellow'
+          backgroundColor: 'yellow',
+          color: 'black'
         },
         green: {
           backgroundColor: 'green'
@@ -273,12 +305,12 @@
       });
     };
 
-    GithubApi.prototype.getUsersRepoData = function(name) {
-      var url;
+    GithubApi.prototype.getUsersRepoData = function(name, callback) {
+      var oprion, url;
       url = this.server + this.userPath + name + this.reposPath;
-      return $.ajax({
-        url: url,
-        type: 'GET'
+      return GithubApi.AjaxCall(url, oprion = {
+        type: 'GET',
+        callback: callback
       });
     };
 
