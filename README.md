@@ -19,6 +19,7 @@ $ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/
 - [JSXTransformaer](https://fb.me/JSXTransformer-0.13.2.js)
 - [JQuery](https://code.jquery.com/jquery-2.1.3.min.js)
 - [Github.api](https://api.github.com)
+- localStorage
 
 ## Usage
 
