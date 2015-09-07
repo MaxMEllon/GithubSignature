@@ -6,6 +6,8 @@
   Signature = (function(_super) {
     __extends(Signature, _super);
 
+    Signature.displayName = 'Signature';
+
     function Signature(props) {
       Signature.__super__.constructor.call(this, props);
       if (props.data.name === null) {
@@ -63,6 +65,8 @@
     function ColorBoxList() {
       return ColorBoxList.__super__.constructor.apply(this, arguments);
     }
+
+    ColorBoxList.displayName = 'ColorBoxList';
 
     ColorBoxList.defaultProps = {
       style: {
@@ -143,6 +147,8 @@
       return ColorBox.__super__.constructor.apply(this, arguments);
     }
 
+    ColorBox.displayName = 'ColorBox';
+
     ColorBox.defaultProps = {
       style: {
         fontSize: '10px',
@@ -193,6 +199,8 @@
   DataList = (function(_super) {
     __extends(DataList, _super);
 
+    DataList.displayName = 'DataList';
+
     function DataList(props) {
       DataList.__super__.constructor.call(this, props);
       if (props.data.name === null) {
@@ -242,6 +250,8 @@
     function Avatar() {
       return Avatar.__super__.constructor.apply(this, arguments);
     }
+
+    Avatar.displayName = 'Avatar';
 
     Avatar.prototype.render = function() {
       return React.createElement("div", null, React.createElement("img", {
