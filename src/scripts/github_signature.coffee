@@ -1,4 +1,5 @@
 class Signature extends React.Component
+  @displayName: 'Signature'
   constructor: (props) ->
     super props
     props.data.name = props.data.login if props.data.name == null
@@ -29,6 +30,7 @@ class Signature extends React.Component
     </div>
 
 class ColorBoxList extends React.Component
+  @displayName: 'ColorBoxList'
   @defaultProps:
     style:
       red:    backgroundColor: 'red'
@@ -59,6 +61,7 @@ class ColorBoxList extends React.Component
     </div>
 
 class ColorBox extends React.Component
+  @displayName: 'ColorBox'
   @defaultProps:
     style:
       fontSize: '10px'
@@ -87,6 +90,7 @@ class ColorBox extends React.Component
     </div>
 
 class DataList extends React.Component
+  @displayName: 'DataList'
   constructor: (props) ->
     super props
     props.data.name = props.data.login if props.data.name == null
@@ -111,6 +115,7 @@ class DataList extends React.Component
     </div>
 
 class Avatar extends React.Component
+  @displayName: 'Avatar'
   render: ->
     <div>
       <img className="sig-avatar" src={@props.url} />
