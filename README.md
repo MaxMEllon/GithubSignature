@@ -32,11 +32,9 @@ $ wget https://raw.githubusercontent.com/MaxMEllon/GithubSignature/master/build/
     <div id="github-signature"></div>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://fb.me/react-0.13.3.js"></script>
-    <script src="https://fb.me/JSXTransformer-0.13.2.js"></script>
     <script src="path/to/github_signature.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"</script>
     <script>
-      signature = new GithubSignature()
+      signature = new GithubSignature('[id]')
       signature.drawUserSignature('[username]')
     </script>
   </body>
