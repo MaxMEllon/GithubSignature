@@ -118,22 +118,22 @@
       return React.createElement("div", {
         "className": "sig-color-box-list"
       }, React.createElement(ColorBox, {
-        "type": "followers",
-        "num": this.props.data.followers
-      }), React.createElement(ColorBox, {
-        "type": "following",
-        "num": this.props.data.following
-      }), React.createElement(ColorBox, {
         "type": "repos",
         "num": this.props.data.public_repos
       }), React.createElement(ColorBox, {
         "type": "stars",
         "num": stars
+      }), React.createElement(ColorBox, {
+        "type": "followers",
+        "num": this.props.data.followers
+      }), React.createElement(ColorBox, {
+        "type": "following",
+        "num": this.props.data.following
       }), React.createElement("div", {
         "style": style,
         "className": "sig-scouter",
         "type": 'scouter'
-      }, 'S : ' + scouter));
+      }, '戦 : ' + scouter));
     };
 
     return ColorBoxList;
@@ -224,6 +224,15 @@
     }
 
     DataList.prototype.render = function() {
+      if (this.props.data.company.length >= 27) {
+        this.props.data.company = this.props.data.company.substr(0, 24) + '...';
+      }
+      if (this.props.data.location.length >= 27) {
+        this.props.data.location = this.props.data.location.substr(0, 24) + '...';
+      }
+      if (this.props.data.blog.length >= 27) {
+        this.props.data.blog = this.props.data.blog.substr(0, 24) + '...';
+      }
       return React.createElement("div", {
         "className": "sig-container"
       }, React.createElement("div", {
