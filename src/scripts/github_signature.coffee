@@ -157,11 +157,11 @@ class @GithubApi
       callback: callback
 
 class @GithubSignature
-  constructor: ->
+  constructor: (id = 'github-signature')->
     @before = ->
       $('#github-signature').html("loading signature...")
     @callback = (d) ->
-      React.render <Signature data={d} />, document.getElementById('github-signature')
+      React.render <Signature data={d} />, document.getElementById(id)
 
   drawUserSignature: (name)->
     return new GithubApi().getUserData(name, @before, @callback)
