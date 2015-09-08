@@ -329,14 +329,17 @@
   })();
 
   this.GithubSignature = (function() {
-    function GithubSignature() {
+    function GithubSignature(id) {
+      if (id == null) {
+        id = 'github-signature';
+      }
       this.before = function() {
         return $('#github-signature').html("loading signature...");
       };
       this.callback = function(d) {
         return React.render(React.createElement(Signature, {
           "data": d
-        }), document.getElementById('github-signature'));
+        }), document.getElementById(id));
       };
     }
 
