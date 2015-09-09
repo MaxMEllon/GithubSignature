@@ -1,5 +1,5 @@
 (function() {
-  var Avatar, ColorBox, ColorBoxList, DataList, Signature,
+  var Avatar, ColorBox, ColorBoxList, DataList, LangBar, Signature,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -14,7 +14,6 @@
         props.data.name = props.data.login;
       }
       this.langCounts = this.getLangsCount(props.data.name);
-      this.langTypes = this.langCounts.length;
     }
 
     Signature.prototype.getLangsCallback = function(d) {
@@ -52,6 +51,8 @@
         "data": this.props.data
       }), React.createElement(Avatar, {
         "url": this.props.data.avatar_url
+      }), React.createElement(LangBar, {
+        "data": this.langCounts
       }));
     };
 
@@ -250,6 +251,64 @@
     };
 
     return DataList;
+
+  })(React.Component);
+
+  LangBar = (function(_super) {
+    __extends(LangBar, _super);
+
+    LangBar.displayName = 'LangBar';
+
+    LangBar.defaultProps = {
+      hover: false,
+      lavel: ''
+    };
+
+    function LangBar(props) {
+      var key, unit, _i, _len, _ref;
+      LangBar.__super__.constructor.call(this, props);
+      unit = 420 / Object.keys(props.data).length;
+      this.width = [];
+      _ref = Object.keys(props.data);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        this.width[key] = props.data[key] * unit;
+      }
+    }
+
+    LangBar.prototype.onHover = function() {
+      return this.setState({
+        hover: true
+      });
+    };
+
+    LangBar.prototype.onBlur = function() {
+      return this.setState({
+        hover: false
+      });
+    };
+
+    LangBar.prototype.render = function() {
+      var components, key, _i, _len, _ref;
+      components = [];
+      _ref = Object.keys(this.props.data);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        components.push(React.createElement("div", {
+          "className": "sig-lang " + key,
+          "onMouseOver": this.onHover,
+          "onMouseOut": this.onBlur,
+          "style": {
+            width: this.width[key]
+          }
+        }));
+      }
+      return React.createElement("div", {
+        "className": 'sig-lang-bar'
+      }, components);
+    };
+
+    return LangBar;
 
   })(React.Component);
 

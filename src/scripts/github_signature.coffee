@@ -4,7 +4,6 @@ class Signature extends React.Component
     super props
     props.data.name = props.data.login if props.data.name == null
     @langCounts = @getLangsCount(props.data.name)
-    @langTypes  = @langCounts.length
 
   getLangsCallback: (d) ->
     langs = []
@@ -27,6 +26,7 @@ class Signature extends React.Component
       <ColorBoxList data={@props.data} />
       <DataList data={@props.data} />
       <Avatar url={@props.data.avatar_url} />
+      <LangBar data={@langCounts} />
     </div>
 
 class ColorBoxList extends React.Component
@@ -115,6 +115,32 @@ class DataList extends React.Component
       <div className="sig-text sig-location">location : {@props.data.location}</div>
       <div className="sig-text sig-blog">blog : {@props.data.blog}</div>
       <div className="sig-text sig-last-push">last update : {@props.data.updated_at}</div>
+    </div>
+
+class LangBar extends React.Component
+  @displayName: 'LangBar'
+  @defaultProps:
+    hover: false
+    lavel: ''
+
+  constructor: (props) ->
+    super props
+    unit = 420 / Object.keys(props.data).length
+    @width = []
+    for key in Object.keys(props.data)
+      @width[key] = props.data[key] * unit
+
+  onHover: ->
+    @setState hover: true
+  onBlur: ->
+    @setState hover: false
+
+  render: ->
+    components = []
+    for key in Object.keys(@props.data)
+      components.push <div className="sig-lang #{key}" onMouseOver={@onHover} onMouseOut={@onBlur} style={{width: @width[key]}} />
+    <div className='sig-lang-bar'>
+      {components}
     </div>
 
 class Avatar extends React.Component

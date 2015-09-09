@@ -1,5 +1,5 @@
 .signature {
-  width: 420px;
+  width: 410px;
   height: 104px;
   background-color: black;
   color: white;
@@ -27,7 +27,7 @@
     position: relative;
     bottom: 86px;
     left: 102px;
-    width: 236px;
+    width: 226px;
     height: 84px;
     margin-left: 3px;
     clear: both;
@@ -45,14 +45,13 @@
     position: relative;
     height: 20px;
     margin-top: -84px;
-    width: 420px;
+    width: 410px;
     background: white;
     display: inline-flex; }
     .signature .sig-lang-bar .sig-lang {
       position: relative;
-      background-color: blue;
-      height: 20px;
-      min-height: 20px;
+      height: 10px;
+      min-height: 10px;
       display: inline-flex; }
   .signature .sig-avatar {
     position: relative;
