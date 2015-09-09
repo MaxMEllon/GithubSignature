@@ -44,8 +44,7 @@ class ColorBoxList extends React.Component
         color: 'black'
       purple: backgroundColor: 'purple'
   render: ->
-    # stars = githubStars(@props.data.login)
-    stars = 0
+    stars = githubStars(@props.data.login)
     scouter = stars * 1.5 + @props.data.public_repos + @props.data.followers / 2
     style = @props.style.red    if   0 <= scouter < 30
     style = @props.style.orange if  30 <= scouter < 60
@@ -120,6 +119,10 @@ class DataList extends React.Component
 
 class LangBar extends React.Component
   @displayName: 'LangBar'
+  @defaultProps:
+    hover: false
+    lavel: ''
+
   constructor: (props) ->
     super props
     unit = 420 / Object.keys(props.data).length
@@ -127,10 +130,15 @@ class LangBar extends React.Component
     for key in Object.keys(props.data)
       @width[key] = props.data[key] * unit
 
+  onHover: ->
+    @setState hover: true
+  onBlur: ->
+    @setState hover: false
+
   render: ->
     components = []
-    for key in Object.keys(props.data)
-      components.push <div className="sig-lang #{key}" style="width: #{@props.width[key]};" />
+    for key in Object.keys(@props.data)
+      components.push <div className="sig-lang #{key}" onMouseOver={@onHover} onMouseOut={@onBlur} style={{width: @width[key]}} />
     <div className='sig-lang-bar'>
       {components}
     </div>

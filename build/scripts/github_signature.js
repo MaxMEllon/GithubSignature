@@ -96,7 +96,7 @@
 
     ColorBoxList.prototype.render = function() {
       var scouter, stars, style;
-      stars = 0;
+      stars = githubStars(this.props.data.login);
       scouter = stars * 1.5 + this.props.data.public_repos + this.props.data.followers / 2;
       if ((0 <= scouter && scouter < 30)) {
         style = this.props.style.red;
@@ -259,6 +259,11 @@
 
     LangBar.displayName = 'LangBar';
 
+    LangBar.defaultProps = {
+      hover: false,
+      lavel: ''
+    };
+
     function LangBar(props) {
       var key, unit, _i, _len, _ref;
       LangBar.__super__.constructor.call(this, props);
@@ -271,15 +276,31 @@
       }
     }
 
+    LangBar.prototype.onHover = function() {
+      return this.setState({
+        hover: true
+      });
+    };
+
+    LangBar.prototype.onBlur = function() {
+      return this.setState({
+        hover: false
+      });
+    };
+
     LangBar.prototype.render = function() {
       var components, key, _i, _len, _ref;
       components = [];
-      _ref = Object.keys(props.data);
+      _ref = Object.keys(this.props.data);
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         key = _ref[_i];
         components.push(React.createElement("div", {
           "className": "sig-lang " + key,
-          "style": "width: " + this.props.width[key] + ";"
+          "onMouseOver": this.onHover,
+          "onMouseOut": this.onBlur,
+          "style": {
+            width: this.width[key]
+          }
         }));
       }
       return React.createElement("div", {
