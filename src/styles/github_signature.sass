@@ -1,9 +1,9 @@
-$main-width: 410px
+$main-width: 400px
 $main-height: 84px
-
+$lang-bar-height: 10px
 .signature
   width: $main-width
-  height: $main-height + 20px
+  height: $main-height + $lang-bar-height
   background-color: black
   color: white
   overflow: hidden
@@ -11,7 +11,7 @@ $main-height: 84px
   font-family: 'meiryo UI'
 
   $box-list-width: 100px
-  $box-list-height: $main-height - 20px
+  $box-list-height: $main-height - $lang-bar-height * 2
   .sig-color-box-list
     width: $box-list-width
     height: $box-list-height
@@ -60,15 +60,16 @@ $main-height: 84px
 
   .sig-lang-bar
     position: relative
-    height: 10px
+    height: $lang-bar-height
+    min-height: $lang-bar-height
     margin-top: -84px
     width: $main-width
     background: white
     display: inline-flex
     .sig-lang
       position: relative
-      height: 10px
-      min-height: 10px
+      height: $lang-bar-height
+      min-height: $lang-bar-height
       display: inline-flex
 
   .sig-avatar

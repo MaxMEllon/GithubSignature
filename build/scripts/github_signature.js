@@ -276,18 +276,6 @@
       }
     }
 
-    LangBar.prototype.onHover = function() {
-      return this.setState({
-        hover: true
-      });
-    };
-
-    LangBar.prototype.onBlur = function() {
-      return this.setState({
-        hover: false
-      });
-    };
-
     LangBar.prototype.render = function() {
       var components, key, _i, _len, _ref;
       components = [];

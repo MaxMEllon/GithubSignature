@@ -1,6 +1,6 @@
 .signature {
-  width: 410px;
-  height: 104px;
+  width: 400px;
+  height: 94px;
   background-color: black;
   color: white;
   overflow: hidden;
@@ -27,7 +27,7 @@
     position: relative;
     bottom: 86px;
     left: 102px;
-    width: 226px;
+    width: 216px;
     height: 84px;
     margin-left: 3px;
     clear: both;
@@ -43,9 +43,10 @@
       height: 30px; }
   .signature .sig-lang-bar {
     position: relative;
-    height: 20px;
+    height: 10px;
+    min-height: 10px;
     margin-top: -84px;
-    width: 410px;
+    width: 400px;
     background: white;
     display: inline-flex; }
     .signature .sig-lang-bar .sig-lang {
