@@ -130,11 +130,6 @@ class LangBar extends React.Component
     for key in Object.keys(props.data)
       @width[key] = props.data[key] * unit
 
-  onHover: ->
-    @setState hover: true
-  onBlur: ->
-    @setState hover: false
-
   render: ->
     components = []
     for key in Object.keys(@props.data)
