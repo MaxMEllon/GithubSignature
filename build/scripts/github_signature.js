@@ -13,7 +13,7 @@
       if (props.data.name === null) {
         props.data.name = props.data.login;
       }
-      this.langCounts = this.getLangsCount(props.data.name);
+      this.langCounts = this.getLangsCount(props.data.login);
     }
 
     Signature.prototype.getLangsCallback = function(d) {

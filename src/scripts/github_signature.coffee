@@ -3,7 +3,7 @@ class Signature extends React.Component
   constructor: (props) ->
     super props
     props.data.name = props.data.login if props.data.name == null
-    @langCounts = @getLangsCount(props.data.name)
+    @langCounts = @getLangsCount(props.data.login)
 
   getLangsCallback: (d) ->
     langs = []
