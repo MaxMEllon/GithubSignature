@@ -6,7 +6,7 @@
 
 ## About
 
-`Githubsignature` is can be embedded the signature in HTML.
+`Githubsignature` can be embedded the signature in HTML.
 
 ## Installation
 
