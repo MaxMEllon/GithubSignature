@@ -1,0 +1,19 @@
+{
+  "name": "GithubSignature",
+  "version": "0.2.2",
+  "homepage": "https://github.com/MaxMEllon/GithubSignature",
+  "authors": [
+    "MaxMEllon <mozi_kke@excite.co.jp>"
+  ],
+  "description": "Githubsignature can be embedded the signature in HTML",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
